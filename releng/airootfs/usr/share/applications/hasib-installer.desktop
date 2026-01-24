@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Hasib OS Installer
+Comment=Install Hasib OS
+Exec=konsole -e sudo /usr/local/bin/myinstaller.sh
+Icon=system-install
+Terminal=false
+Type=Application
+Categories=System;Installer;

@@ -1,0 +1,12 @@
+NAME="Hasib OS"
+PRETTY_NAME="Hasib OS"
+ID="HASIBOS"
+ID_LIKE="arch"
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://www.hasibos.xyz"
+DOCUMENTATION_URL="https://www.hasibos.xyz"
+SUPPORT_URL="https://www.hasibos.xyz"
+BUG_REPORT_URL="https://www.hasibos.xyz"
+PRIVACY_POLICY_URL="https://www.hasibos.xyz"
+LOGO=logo.png

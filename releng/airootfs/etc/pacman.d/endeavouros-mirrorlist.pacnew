@@ -1,0 +1,156 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# EndeavourOS mirrorlist, ranked by eos-rankmirrors at 12/21/2025 06:20:32 AM.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Server = https://mirror.moson.org/endeavouros/repo/$repo/$arch
+Server = https://mirror.alpix.eu/endeavouros/repo/$repo/$arch
+Server = https://ftp.belnet.be/mirror/endeavouros/repo/$repo/$arch
+Server = https://mirror.rznet.fr/endeavouros/repo/$repo/$arch
+Server = https://pkg.adfinis-on-exoscale.ch/endeavouros/repo/$repo/$arch
+Server = https://repo.c48.uk/endeavouros/repo/$repo/$arch
+Server = https://mirror.accum.se/mirror/endeavouros/repo/$repo/$arch
+Server = https://fosszone.csd.auth.gr/endeavouros/repo/$repo/$arch
+Server = https://ftp.rz.tu-bs.de/pub/mirror/endeavouros/repo/$repo/$arch
+Server = https://de.repo.c48.uk/endeavouros/repo/$repo/$arch
+Server = https://mirror.gofoss.xyz/endeavouros/repo/$repo/$arch
+Server = https://mirror.archlinux.tw/EndeavourOS/repo/$repo/$arch
+Server = https://mirrors.gigenet.com/endeavouros/repo/$repo/$arch
+Server = https://mirror.meowsmp.net/endeavouros/repo/$repo/$arch
+Server = https://mirrors.urbanwave.co.za/endeavouros/repo/$repo/$arch
+Server = https://mirror.retropc.se/endeavouros/repo/$repo/$arch
+Server = https://mirror.freedif.org/EndeavourOS/repo/$repo/$arch
+Server = https://mirror.jingk.ai/endeavouros/repo/$repo/$arch
+Server = https://mirrors.nxtgen.com/endeavouros-mirror/repo/$repo/$arch
+Server = https://mirror.funami.tech/endeavouros/repo/$repo/$arch
+Server = https://mirror.del2.albony.in/endeavouros/repo/$repo/$arch
+Server = https://mirrors.c0urier.net/linux/endeavouros/repo/$repo/$arch
+Server = https://mirror.b-interactive.com.au/endeavouros/repo/$repo/$arch
+Server = https://www.miraa.jp/endeavouros/repo/$repo/$arch
+Server = https://mirror.albony.in/endeavouros/repo/$repo/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/endeavouros/repo/$repo/$arch
+Server = https://mirrors.jlu.edu.cn/endeavouros/repo/$repo/$arch
+Server = https://mirror.sjtu.edu.cn/endeavouros/repo/$repo/$arch
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Mirror ranking info at (UTC) 12/21/2025 01:20:32 PM:
+# The following fields are shown for each mirror:
+#   mirror:          The mirror address
+#   update-level:    Ordinal number of the latest update (larger is newer)
+#   fetch-time:      Measures the speed of the mirror (smaller is faster)
+#
+# mirror                                                             update-level  fetch-time
+# ~~~~~~                                                             ~~~~~~~~~~~~  ~~~~~~~~~~
+# https://mirror.moson.org/endeavouros/repo/$repo/$arch              2537          0.259012
+# https://mirror.alpix.eu/endeavouros/repo/$repo/$arch               2537          0.327945
+# https://ftp.belnet.be/mirror/endeavouros/repo/$repo/$arch          2537          0.331662
+# https://mirror.rznet.fr/endeavouros/repo/$repo/$arch               2537          0.376705
+# https://pkg.adfinis-on-exoscale.ch/endeavouros/repo/$repo/$arch    2537          0.380560
+# https://repo.c48.uk/endeavouros/repo/$repo/$arch                   2537          0.401170
+# https://mirror.accum.se/mirror/endeavouros/repo/$repo/$arch        2537          0.432589
+# https://fosszone.csd.auth.gr/endeavouros/repo/$repo/$arch          2537          0.448548
+# https://ftp.rz.tu-bs.de/pub/mirror/endeavouros/repo/$repo/$arch    2537          0.531374
+# https://de.repo.c48.uk/endeavouros/repo/$repo/$arch                2537          0.562927
+# https://mirror.gofoss.xyz/endeavouros/repo/$repo/$arch             2537          0.642903
+# https://mirror.archlinux.tw/EndeavourOS/repo/$repo/$arch           2537          0.691795
+# https://mirrors.gigenet.com/endeavouros/repo/$repo/$arch           2537          0.722800
+# https://mirror.meowsmp.net/endeavouros/repo/$repo/$arch            2537          0.766163
+# https://mirrors.urbanwave.co.za/endeavouros/repo/$repo/$arch       2537          0.799246
+# https://mirror.retropc.se/endeavouros/repo/$repo/$arch             2537          0.806645
+# https://mirror.freedif.org/EndeavourOS/repo/$repo/$arch            2537          0.832102
+# https://mirror.jingk.ai/endeavouros/repo/$repo/$arch               2537          0.930844
+# https://mirrors.nxtgen.com/endeavouros-mirror/repo/$repo/$arch     2537          0.984915
+# https://mirror.funami.tech/endeavouros/repo/$repo/$arch            2537          1.005879
+# https://mirror.del2.albony.in/endeavouros/repo/$repo/$arch         2537          1.031476
+# https://mirrors.c0urier.net/linux/endeavouros/repo/$repo/$arch     2537          1.087658
+# https://mirror.b-interactive.com.au/endeavouros/repo/$repo/$arch   2537          1.147210
+# https://www.miraa.jp/endeavouros/repo/$repo/$arch                  2537          1.541505
+# https://mirror.albony.in/endeavouros/repo/$repo/$arch              2537          1.545984
+# https://mirrors.tuna.tsinghua.edu.cn/endeavouros/repo/$repo/$arch  2537          1.550369
+# https://mirrors.jlu.edu.cn/endeavouros/repo/$repo/$arch            2537          1.599769
+# https://mirror.sjtu.edu.cn/endeavouros/repo/$repo/$arch            2537          3.639811
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Original mirrorlist before ranking:
+
+######################################################
+####                                              ####
+###        EndeavourOS Repository Mirrorlist       ###
+####                                              ####
+######################################################
+#### Entry in file /etc/pacman.conf:
+###     [endeavouros]
+###     SigLevel = PackageRequired
+###     Include = /etc/pacman.d/endeavouros-mirrorlist
+######################################################
+### Tip: Use the 'eos-rankmirrors' program to rank
+###      these mirrors or re-order them manually.
+######################################################
+
+## Australia
+#Server = https://mirror.b-interactive.com.au/endeavouros/repo/$repo/$arch
+
+## Belgium
+#Server = https://ftp.belnet.be/mirror/endeavouros/repo/$repo/$arch
+
+## China
+#Server = https://mirrors.tuna.tsinghua.edu.cn/endeavouros/repo/$repo/$arch
+#Server = https://mirrors.jlu.edu.cn/endeavouros/repo/$repo/$arch
+#Server = https://mirror.sjtu.edu.cn/endeavouros/repo/$repo/$arch
+
+## Denmark
+#Server = https://mirrors.c0urier.net/linux/endeavouros/repo/$repo/$arch
+
+## France
+#Server = https://mirror.rznet.fr/endeavouros/repo/$repo/$arch
+
+## Germany
+#Server = https://mirror.alpix.eu/endeavouros/repo/$repo/$arch
+#Server = https://mirror.moson.org/endeavouros/repo/$repo/$arch
+#Server = https://ftp.rz.tu-bs.de/pub/mirror/endeavouros/repo/$repo/$arch
+#Server = https://de.repo.c48.uk/endeavouros/repo/$repo/$arch
+
+## Greece
+#Server = https://fosszone.csd.auth.gr/endeavouros/repo/$repo/$arch
+
+## India
+#Server = https://mirror.albony.in/endeavouros/repo/$repo/$arch
+#Server = https://mirror.del2.albony.in/endeavouros/repo/$repo/$arch
+#Server = https://mirrors.nxtgen.com/endeavouros-mirror/repo/$repo/$arch
+
+## Japan
+#Server = https://www.miraa.jp/endeavouros/repo/$repo/$arch
+
+## Singapore
+#Server = https://mirror.jingk.ai/endeavouros/repo/$repo/$arch
+#Server = https://mirror.freedif.org/EndeavourOS/repo/$repo/$arch
+
+## South Africa
+#Server = https://mirrors.urbanwave.co.za/endeavouros/repo/$repo/$arch
+
+## South Korea
+#Server = https://mirror.funami.tech/endeavouros/repo/$repo/$arch
+
+## Sweden
+#Server = https://mirror.accum.se/mirror/endeavouros/repo/$repo/$arch
+#Server = https://mirror.retropc.se/endeavouros/repo/$repo/$arch
+
+## Switzerland
+#Server = https://mirror.gofoss.xyz/endeavouros/repo/$repo/$arch
+#Server = https://pkg.adfinis-on-exoscale.ch/endeavouros/repo/$repo/$arch
+
+## Taiwan
+#Server = https://mirror.archlinux.tw/EndeavourOS/repo/$repo/$arch
+
+## Ukraine
+#Server = https://distrohub.kyiv.ua/endeavouros/repo/$repo/$arch
+
+## United Kingdom
+#Server = https://repo.c48.uk/endeavouros/repo/$repo/$arch
+
+## United States
+#Server = https://mirrors.gigenet.com/endeavouros/repo/$repo/$arch
+
+## Vietnam
+#Server = https://mirror.meowsmp.net/endeavouros/repo/$repo/$arch
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

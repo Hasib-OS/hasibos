@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=ArchInstall
+Comment=Start ArchInstall in terminal
+Exec=konsole --noclose -e sudo archinstall
+Icon=utilities-terminal
+Terminal=true
+Type=Application
+Categories=System;Installer;
