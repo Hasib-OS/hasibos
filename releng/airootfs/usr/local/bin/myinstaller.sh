@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "=== Arch-based Installer ==="
+echo "=== Hasib OS Installer (Arch-based) ==="
 
 # 1️⃣ Username and password
 read -p "Enter your username: " USERNAME
@@ -38,43 +38,88 @@ mount "$EFI_PART" /mnt/target/boot/efi
 
 # 5️⃣ Base packages (must install)
 BASE_PKGS=(
-base linux linux-firmware linux-atm intel-ucode amd-ucode
+base linux linux-firmware intel-ucode amd-ucode
 mkinitcpio grub efibootmgr sudo bash coreutils util-linux
 networkmanager
 )
 
-# 6️⃣ Additional recommended packages
+# 6️⃣ Extra packages (light KDE for live)
 EXTRA_PKGS=(
-alsa-utils arch-install-scripts bcachefs-tools bind bolt brltty btrfs-progs cloud-init cryptsetup dhcpcd diffutils dmidecode dosfstools e2fsprogs
-edk2-shell espeakup ethtool exfatprogs f2fs-tools fatresize foot-terminfo fsarchiver gparted gpm gptfdisk hdparm hyperv iw iwd jfsutils
-ldns less lftp libfido2 libusb-compat lsscsi lvm2 man-db man-pages mc mdadm memtest86+ memtest86+-efi mmc-utils modemmanager mtools nano
-nbd ndisc6 nfs-utils nilfs-utils nmap ntfs-3g nvme-cli open-iscsi open-vm-tools openconnect openpgp-card-tools openssh openvpn partclone
-parted partimage pcsclite ppp pptpclient pv qemu-guest-agent refind reflector rsync screen sdparm sg3_utils smartmontools sof-firmware
-squashfs-tools syslinux systemd-resolvconf tcpdump terminus-font testdisk tmux tpm2-tools tpm2-tss udftools usb_modeswitch usbmuxd usbutils
-vim virtualbox-guest-utils-nox vpnc wireless-regdb wireless_tools wpa_supplicant wvdial xfsprogs xl2tpd zsh zenity gtk4 libadwaita flatpak git libreoffice-fresh power-profiles-daemon
+alsa-utils arch-install-scripts btrfs-progs cloud-init dhcpcd e2fsprogs
+dosfstools edk2-shell ethtool exfatprogs gparted gpm gptfdisk hdparm
+iw iwd less lftp man-db man-pages nano nmap ntfs-3g open-iscsi openssh
+openvpn parted pv reflector rsync screen smartmontools syslinux tcpdump
+tmux usbutils vim zsh git
 )
 
 # 7️⃣ Desktop packages
-DESKTOP_PKGS=(
-xorg-server xorg-apps xorg-xinit plasma plasma-workspace plasma-desktop kde-applications sddm networkmanager plasma-nm firefox chromium
-)
+KDE_PKGS=(xorg-server xorg-apps plasma plasma-workspace plasma-desktop sddm networkmanager firefox chromium)
+XFCE_PKGS=(xorg-server xorg-apps xfce4 xfce4-goodies lightdm lightdm-gtk-greeter networkmanager firefox chromium)
+LXQT_PKGS=(xorg-server xorg-apps lxqt sddm networkmanager firefox chromium)
 
-# 8️⃣ Ask user for installation type
+# 8️⃣ Choose installation type
 echo "Select installation type:"
 echo "1) Minimal (no GUI)"
-echo "2) Desktop (Xorg + KDE Plasma)"
-read -p "Choice [1-2]: " INSTALL_TYPE
+echo "2) KDE Plasma"
+echo "3) XFCE"
+echo "4) LXQT"
+read -p "Choice [1-4]: " INSTALL_TYPE
 
-if [[ "$INSTALL_TYPE" == "2" ]]; then
-    INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}" "${DESKTOP_PKGS[@]}")
-else
-    INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}")
-fi
+case "$INSTALL_TYPE" in
+  1) INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}") ;;
+  2)
+     INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}" "${KDE_PKGS[@]}")
+     read -p "Install KDE applications? (y/n): " KDE_APPS
+     if [[ "$KDE_APPS" != "y" ]]; then
+         INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}" "${KDE_PKGS[@]/kde-applications}")
+     fi
+     ;;
+  3)
+     INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}" "${XFCE_PKGS[@]}")
+     read -p "Install XFCE goodies? (y/n): " XFCE_GOODIES
+     if [[ "$XFCE_GOODIES" != "y" ]]; then
+         INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}" "${XFCE_PKGS[@]/xfce4-goodies}")
+     fi
+     ;;
+  4) INSTALL_PKGS=("${BASE_PKGS[@]}" "${EXTRA_PKGS[@]}" "${LXQT_PKGS[@]}") ;;
+  *) echo "Invalid choice"; exit 1 ;;
+esac
 
-# 9️⃣ Pacstrap install
+# 9️⃣ Choose timezone
+echo "Select your timezone:"
+echo "1) Riyadh GMT+3"
+echo "2) UTC GMT+0"
+echo "3) New York GMT-5"
+echo "4) Tokyo GMT+9"
+read -p "Choice [1-4]: " TZ_CHOICE
+case "$TZ_CHOICE" in
+  1) TZ=Asia/Riyadh ;;
+  2) TZ=UTC ;;
+  3) TZ=America/New_York ;;
+  4) TZ=Asia/Tokyo ;;
+  *) TZ=UTC ;;
+esac
+
+# 10️⃣ Choose language
+echo "Select your language:"
+echo "1) Arabic"
+echo "2) English-US"
+echo "3) Español"
+echo "4) 中文"
+read -p "Choice [1-4]: " LANG_CHOICE
+case "$LANG_CHOICE" in
+  1) LANG=ar_SA.UTF-8 ;;
+  2) LANG=en_US.UTF-8 ;;
+  3) LANG=es_ES.UTF-8 ;;
+  4) LANG=zh_CN.UTF-8 ;;
+  *) LANG=en_US.UTF-8 ;;
+esac
+
+# 11️⃣ Pacstrap install
 echo "Installing base system and selected packages..."
 pacstrap /mnt/target "${INSTALL_PKGS[@]}"
 
+# 12️⃣ Prepare directories
 arch-chroot /mnt/target /bin/bash <<EOF
 mkdir -p /etc/default
 mkdir -p /usr/share/pixmaps
@@ -86,6 +131,12 @@ mkdir -p /usr/local/share/livecd-sound
 mkdir -p /usr/local/share/pixmaps
 EOF
 
+# 13️⃣ Copy pixmaps/icons
+if [ -d /usr/local/share/pixmaps ]; then
+    cp -r /usr/local/share/pixmaps/* /mnt/target/usr/share/pixmaps/
+fi
+
+# 14️⃣ OS release
 cat > /mnt/target/etc/os-release <<EOF
 NAME="Hasib OS"
 PRETTY_NAME="Hasib OS"
@@ -101,6 +152,7 @@ PRIVACY_POLICY_URL="https://www.hasibos.xyz"
 LOGO=logo.png
 EOF
 
+# 15️⃣ GRUB config
 cat > /mnt/target/etc/default/grub <<EOF
 GRUB_DEFAULT='0'
 GRUB_TIMEOUT='5'
@@ -109,16 +161,8 @@ GRUB_CMDLINE_LINUX_DEFAULT='nowatchdog nvme_load=YES loglevel=3'
 GRUB_CMDLINE_LINUX=""
 EOF
 
-[ -f /usr/local/share/pixmaps/logo.png ] && cp /usr/local/share/pixmaps/logo.png /mnt/target/usr/local/share/pixmaps/logo.png
-[ -f /usr/local/share/livecd-sound/asound.conf.in ] && cp /usr/local/share/livecd-sound/asound.conf.in /mnt/target/usr/local/share/livecd-sound/asound.conf.in
-[ -f airootfs/usr/local/bin/Installation_guide ] && cp airootfs/usr/local/bin/Installation_guide /mnt/target/usr/local/bin/Installation_guide
-[ -f /usr/share/pixmaps/logo.png ] && cp /usr/share/pixmaps/logo.png /mnt/target/usr/share/pixmaps/logo.png
-[ -d /usr/share/icons/hicolor ] && cp -r /usr/share/icons/hicolor /mnt/target/usr/share/icons/hicolor
-
-# 11️⃣ Chroot for system setup
-# 11️⃣ Chroot for system setup
+# 16️⃣ Chroot for system setup
 arch-chroot /mnt/target /bin/bash <<EOF
-
 # User
 useradd -m -G wheel -s /bin/bash $USERNAME
 echo "$USERNAME:$PASSWORD" | chpasswd
@@ -127,32 +171,21 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 genfstab -U / > /etc/fstab
 
 # Timezone and hostname
-ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
 hwclock --systohc
 echo "hasib" > /etc/hostname
+echo "LANG=$LANG" > /etc/locale.conf
 
 # Enable services
-systemctl enable sddm
 systemctl enable NetworkManager
+[[ "$INSTALL_TYPE" == "2" || "$INSTALL_TYPE" == "3" || "$INSTALL_TYPE" == "4" ]] && systemctl enable sddm
 
-# GRUB (UEFI)
+# GRUB
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Fallback EFI (for broken UEFI)
-mkdir -p /boot/efi/EFI/BOOT
-cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
-
 # Initramfs
 mkinitcpio -P
-
 EOF
-
-
-# 12️⃣ Optional extra packages
-read -p "Do you want to install additional packages? (space-separated, leave blank to skip): " USER_PKGS
-if [ -n "$USER_PKGS" ]; then
-    arch-chroot /mnt/target /bin/bash -c "pacman -Sy --noconfirm $USER_PKGS"
-fi
 
 echo "Installation complete! You can reboot now."
