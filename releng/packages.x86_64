@@ -132,7 +132,6 @@ xorg-xinit
 plasma
 plasma-workspace
 plasma-desktop
-kde-applications
 sddm
 networkmanager
 plasma-nm
